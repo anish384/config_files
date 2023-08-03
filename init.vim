@@ -333,7 +333,7 @@ nnoremap <C-p> :bprevious<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-nnoremap <Space>y <leader>+y " this is for copying from here and pasting somewhere else
+nnoremap <Space>y <leader>+y " this is yanking into our system clipboard 
 
 nmap <f5> :w <Bar> !open %<CR>
 
