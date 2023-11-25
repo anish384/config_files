@@ -1,5 +1,4 @@
 " plugins 
-
 call plug#begin()
 " competitive programming plugins
 Plug 'MunifTanjim/nui.nvim'        " it's a dependency
@@ -8,25 +7,24 @@ Plug 'xeluxee/competitest.nvim'
 Plug 'phaazon/hop.nvim'
 Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 Plug 'Pocco81/auto-save.nvim'
-Plug 'https://github.com/is0n/jaq-nvim'
 Plug 'https://github.com/xiyaowong/transparent.nvim'
 Plug 'jiangmiao/auto-pairs' " for pairs [] 
-Plug 'honza/vim-snippets' " snippets
-Plug 'dcampos/nvim-snippy' "snippets
 " Use release branch (recommended)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Or build from source code by using npm
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm ci'}
 " colorschemes 
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'numToStr/Comment.nvim'
+Plug 'https://github.com/is0n/jaq-nvim'
 call plug#end()
-
 
 :set nu
 :set relativenumber
 :set autoindent
 :set tabstop=4
 :set shiftwidth=4
+:set nohlsearch
 :set smarttab
 :set softtabstop=4
 :set mouse=v
@@ -35,17 +33,16 @@ call plug#end()
 set background=dark " or light if you want light mode
 
 "mappings
-map <space>r :Jaq <cr>	"coderunner
+map <space>r :Jaq<cr>	
 map <space>y "+y<cr> 
-map <space>hh <cmd>HopWord<cr>
-map <space>ll <cmd>HopLine<cr>
-map <space>hp <cmd>HopPattern<cr>
+map <space>h <cmd>HopWord<cr>
+map <space>l <cmd>HopLine<cr>
+map <space>p <cmd>HopPattern<cr>
 
 "competitive programming mappings
 map <space>cr :CompetiTest run<cr>
 map <space>aa :CompetiTest add_testcase<cr>
 map <space>dd :CompetiTest delete_testcase<cr>
-
 
 "remappings
 imap fj <Esc>
@@ -54,8 +51,6 @@ imap jj <c-j>
 nmap <Space>w :w<cr>
 nmap <Space>z :wq<cr>
 nmap <Space>q :q!<cr>
-
-
 
 " yanking into system using osc25
 "let g:oscyank_max_length = 0  " maximum length of a selection
@@ -91,12 +86,18 @@ inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
 
 lua <<EOF
+
 require("gruvbox").setup({
     overrides = {
-        SignColumn = {bg = "#ff9900"}
+        ["@lsp.type.method"] = { bg = "#ff9900" },
+        ["@comment.lua"] = { bg = "#000000" },
     }
 })
 vim.cmd("colorscheme gruvbox")
+require("auto-save").setup {}
+require('competitest').setup() -- to use default configuration
+require'hop'.setup()
+require('Comment').setup()
 require('jaq-nvim').setup{
   cmds = {
     -- Uses vim commands
@@ -107,14 +108,13 @@ require('jaq-nvim').setup{
 
     -- Uses shell commands
     external = {
-		markdown = "glow %",
-		python   = "python3 %",
-		go       = "go run %",
-		sh       = "sh %",
-		cpp      = "g++ % -o $fileBase -std=c++20 && ./$fileBase",
-		c		 = "gcc % -o $fileBase && ./$fileBase",
-		java	 = "javac $fileBase.java && java $fileBase"
-
+      markdown = "glow %",
+      python   = "python3 %",
+      go       = "go run %",
+      sh       = "sh %",
+	  cpp="g++ % -o $fileBase -std=c++20 && ./$fileBase",
+	  c="gcc % -o $fileBase && ./$fileBase",
+	  java="javac $fileBase.java && java $fileBase"
     }
   },
 
@@ -123,7 +123,7 @@ require('jaq-nvim').setup{
     default     = "float",
 
     -- Start in insert mode
-    startinsert = true,
+    startinsert = false,
 
     -- Use `wincmd p` on startup
     wincmd      = false,
@@ -145,8 +145,8 @@ require('jaq-nvim').setup{
       winblend  = 0,
 
       -- Num from `0-1` for measurements
-      height    = 0.7,
-      width     = 0.7,
+      height    = 0.8,
+      width     = 0.8,
       x         = 0.5,
       y         = 0.5
     },
@@ -171,8 +171,4 @@ require('jaq-nvim').setup{
     }
   }
 }
-
-require("auto-save").setup {}
-require('competitest').setup() -- to use default configuration
-require'hop'.setup()
 EOF
