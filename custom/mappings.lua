@@ -35,7 +35,7 @@ vim.api.nvim_set_keymap('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true, silent =
 vim.api.nvim_set_keymap('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 -- Map ww to <C-w> in insert mode
 vim.api.nvim_set_keymap('i', 'ww', '<C-w>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Space>w', ':wq<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'q', ':wq<cr>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', 'U', '<C-u>zz', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'D', '<C-d>zz', { noremap = true, silent = true })
