@@ -161,3 +161,4 @@ require'lspconfig'.rust_analyzer.setup{}
 EOF
 
 nnoremap <space>u :UndotreeToggle<CR>
+
