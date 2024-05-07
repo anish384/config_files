@@ -1,67 +1,83 @@
 snippet cp
-	#include <bits/stdc++.h>
-	using namespace std;
+    #include <bits/stdc++.h>
+    using namespace std;
 
-	/* typedefs */
-	typedef long long ll;
-	typedef	vector<int> vi;
-	typedef map<int,int> mi;
-	typedef stack<int> st;
-	
-	/* some macros */
-	#define pb push_back 
-	#define p pop 
-	#define pu push 
-	
-	#define bug(...)       __f (#__VA_ARGS__, __VA_ARGS__)
-	template <typename Arg1>
-	void __f (const char* name, Arg1&& arg1) { cout << name << " : " << arg1 << endl; }
-		template <typename Arg1, typename... Args>
-	void __f (const char* names, Arg1&& arg1, Args&&... args)
-	{
-		const char* comma = strchr (names + 1, ',');
-		cout.write (names, comma - names) << " : " << arg1 << " | "; __f (comma + 1, args...);
-	}
-	
-	/* repetitive tasks */
-	#define fr(a, b) for(int i = a; i < b; i++)
-	#define fn(a) for(int i = a; i >= 0; i--)
-	
-	/* inline functions */
-	inline int square(int x) { return x * x; }
-	
-	/* power function */
-	inline int power(int a, int b)
-	{
-		int x = 1;
-		while (b)
-		{
-			if (b & 1) x *= a;
-			a *= a;
-			b >>= 1;
-		}
-		return x;
-	}
-	
-	void solve()
-	{
-		${0}
-	}
-	
-	int32_t main() {
-		ios::sync_with_stdio(false);
-		cin.tie(nullptr);
-	
-		int t = 1; 
-		// cin >> t; 
-	
-		while (t--) {
-			solve();
-		}
-	
-		return 0;
-	}
-snippet base "baseofcpp"
+    /* typedefs */
+    typedef long long ll;
+    typedef vector<int> vi;
+    typedef map<int,int> mi;
+    typedef stack<int> st;
+    typedef vector<pair<int,int>> ii;
+
+    /* some macros */
+    #define pb push_back 
+    #define p pop 
+    #define pu push 
+
+    #define bug(...)       __f (#__VA_ARGS__, __VA_ARGS__)
+    template <typename Arg1>
+    void __f (const char* name, Arg1&& arg1) { cout << name << " : " << arg1 << endl; }
+    template <typename Arg1, typename... Args>
+    void __f (const char* names, Arg1&& arg1, Args&&... args)
+    {
+        const char* comma = strchr (names + 1, ',');
+        cout.write (names, comma - names) << " : " << arg1 << " | "; __f (comma + 1, args...);
+    }
+    
+    /* sizeof my int byte */
+    #define soi sizeof(int) * CHAR_BIT
+    #define sol sizeof(long long) * CHAR_BIT
+
+    /* repetitive tasks */
+    #define fr(i, a, b) for(int i = a; i < b; i++)
+    #define fn(a) for(int i = a; i >= 0; i--)
+
+    /* inline functions */
+    inline int square(int x) { return x * x; }
+
+    /* power function */
+    inline int power(int a, int b)
+    {
+        int x = 1;
+        while (b)
+        {
+            if (b & 1) x *= a;
+            a *= a;
+            b >>= 1;
+        }
+        return x;
+    }
+    /* custom templates */
+
+    // vector input vci
+    template<typename T>
+    void vci(vector<T>& vec, int size){
+        for(int i= 0; i < size; i++){
+            T input;
+            cin >> input;
+            vec.push_back(input);
+        }
+    }
+
+    void solve()
+    {
+        ${0}
+    }
+
+    int32_t main() {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+
+        int t = 1; 
+        // cin >> t;
+
+        while (t--) {
+            solve();
+        }
+
+        return 0;
+    }
+snippet st "baseofcpp"
 	#include <bits/stdc++.h>
 	using namespace std;
 	int main()
@@ -100,3 +116,60 @@ snippet ma "main"
 snippet vi "vector of int"
     vector <int> ${1};
     ${0}
+
+snippet cc "cout"
+    cout<<${0}
+
+snippet ci "cin"
+    cin>>${0}
+
+snippet bc "bits"
+    #include <bits/stdc++.h>
+    ${0}
+
+snippet us "using namespace std;"
+    using namespace std;
+    ${0}
+
+snippet class "class"
+    class ${1:name_of_class}
+    {
+        ${0}
+    };
+
+snippet icn "int n; cin>>n;"
+    int n;
+    cin >> n;
+    ${0}
+
+snippet base "base of cpp"
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    /* typedefs */
+    typedef long long ll;
+    typedef vector<int> vi;
+    typedef map<int,int> mi;
+    typedef stack<int> st;
+    typedef vector<pair<int,int>> ii;
+
+    /* some macros */
+    #define pb push_back 
+    #define p pop 
+    #define pu push 
+
+    /* repetitive tasks */
+    #define fr(i, a, b) for(int i = a; i < b; i++)
+    #define fn(a) for(int i = a; i >= 0; i--)
+
+    /* sizeof my int byte */
+    #define soi sizeof(int) * CHAR_BIT
+    #define sol sizeof(long long) * CHAR_BIT
+
+    int main()
+    {
+        ${0}
+    }
+
+snippet cin "cin >> "
+    cin>>${0}
