@@ -1,5 +1,20 @@
 return {
     -- Lua
+    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons',lazy = false},
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {},
+        -- stylua: ignore
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+        },
+        lazy = false,
+    },
     {
         'https://github.com/preservim/nerdtree',
         lazy = false,
@@ -119,6 +134,12 @@ return {
     },
     {
         'Pocco81/auto-save.nvim',
+        config = function()
+            require("auto-save").setup {
+                -- your config goes here
+                -- or just leave it empty :)
+            }
+        end,
         lazy = false,
     },
     {
