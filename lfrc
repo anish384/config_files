@@ -1,0 +1,52 @@
+set hidden true
+set icons true
+set ignorecase true
+
+cmd exe ${{
+	nvim "$f"
+}}
+
+cmd lazy $lazygit
+
+cmd delete ${{
+        set -f
+        printf "$fx\n"
+        printf "delete?[y/n]"
+        read ans
+        [ "$ans" = "y" ] && echo "$fx" | while IFS= read -r file; do 
+            rm -rf "$file"
+        done
+}}
+
+cmd mkdir ${{
+    printf "Directory name: "
+    read ans 
+    mkdir $ans
+}}
+
+cmd mkfile ${{
+    printf "File name: "
+    read ans 
+    nvim "$ans"
+}}
+
+cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+map r push :rename<space>
+
+map e exe
+
+map gs cd ~/.config/nvim/my_snippet/
+map gc cd ~/.config/nvim/lua/
+map gd cd /mnt/c/Users/anishdesai/Desktop/
+map gl  cd ~/.local/share/nvim/lazy/
+map gp cd /mnt/c/Users/anishdesai/Desktop/cp/Practice/
+map I cd /mnt/c/Users/anishdesai/Documents/Git_hub/
+map C cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Codeforces/
+map P cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Practice/
+map A cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/AtCoder/
+map S cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Codechef/
+
+map M mkdir
+map F mkfile
+map D delete
+map L lazy
