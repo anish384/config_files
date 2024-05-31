@@ -5,14 +5,15 @@ snippet cp
     /* typedefs */
     typedef long long ll;
     typedef vector<int> vi;
-    typedef map<int,int> mi;
-    typedef stack<int> st;
     typedef vector<pair<int,int>> ii;
 
     /* some macros */
     #define pb push_back 
-    #define p pop 
-    #define pu push 
+    // #define int ll
+    #define SWAP(a, b) (((a) ^= (b)), ((b) ^= (a)), ((a) ^= (b)))
+     
+    /* some consts */ 
+    const int m = 1e9+7;
 
     #define bug(...)       __f (#__VA_ARGS__, __VA_ARGS__)
     template <typename Arg1>
@@ -26,6 +27,7 @@ snippet cp
 
     /* global variable */    
     int flag = 0;
+    int cnt = 0;
 
     /* sizeof my int byte */
     #define soi sizeof(int) * CHAR_BIT
@@ -36,7 +38,8 @@ snippet cp
     #define fn(i,a) for(int i = a; i >= 0; i--)
 
     /* inline functions */
-    inline int square(int x) { return x * x; }
+    inline int sq(int x) { return x * x; }
+    inline int ceil_dev(int a, int b){ return (a+b-1)/b; }
 
     /* power function */
     inline int power(int a, int b)
@@ -50,17 +53,24 @@ snippet cp
         }
         return x;
     }
+    long long binpow(long long a, long long b, long long m) {
+        a %= m;
+        long long res = 1;
+        while (b > 0) {
+            if (b & 1)
+                res = res * a % m;
+            a = a * a % m;
+            b >>= 1;
+        }
+        return res;
+    }
     /* custom templates */
-
     // vector input vci
     template<typename T>
-    void vci(vector<T>& vec, int size){
-        for(int i= 0; i < size; i++){
-            T input;
-            cin >> input;
-            vec.push_back(input);
-        }
-    }
+    void vci(vector<T>& vec, int size){ for(int i= 0; i < size; i++){ T input; cin >> input; vec.push_back(input); } }
+
+    template <typename T> void vvci(vector<vector<T>>& vec, int rows, int cols) { for (int i = 0; i < rows; ++i) { vector<T> row; for (int j = 0; j < cols; ++j) { T input; cin >> input; row.push_back(input); } vec.push_back(row); } }
+
 
     void solve()
     {
@@ -188,4 +198,3 @@ snippet base "base of cpp"
 
 snippet cin "cin >> "
     cin>>${0}
-
