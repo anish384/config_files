@@ -2,19 +2,107 @@ snippet cp
     #include <bits/stdc++.h>
     using namespace std;
 
-    /* typedefs */
+    /* Macros */
+    #define pb push_back 
+    #define SWAP(a, b) (((a) ^= (b)), ((b) ^= (a)), ((a) ^= (b)))
+    #define py cout << "Yes" << '\n'
+    #define pn cout << "No" << '\n'
+    #define pyy cout << "yes" << '\n'
+    #define pnn cout << "no" << '\n'
+    #define pY cout << "YES" << '\n'
+    #define pN cout << "NO" << '\n'
+    #define endl '\n'
+    #define icn(type, var) type var; cin >> var
+    #define In(var) cin>>var;
+    #define print(var) cout << var << endl
+
+    /* Size of integer and long long in bits */
+    #define soi (sizeof(int) * CHAR_BIT)
+    #define sol (sizeof(long long) * CHAR_BIT)
+
+    /* Repetitive Tasks */
+    #define fr(i, a, b) for(int i = a; i < b; i++)
+    #define fn(i, a) for(int i = a; i >= 0; i--)
+
+    #define d_pair(p) cout << #p << " = (" << p.first << ", " << p.second << ")" << endl
+
+
+    #define d_con(container) { \
+        cout << #container << " = {" << endl << "  "; \
+        for (const auto &item : container) cout << item << " "; \
+        cout << endl << "}" << endl; \
+    }
+
+    #define d_con_pairs(container) { \
+        cout << #container << " = {" << endl; \
+        for (const auto &p : container) { \
+            cout << "  {" << p.first << ", " << p.second << "}"; \
+            cout << endl; \
+        } \
+        cout << "}" << endl; \
+    }
+
+    #define d_con_2d(container) { \
+        cout << #container << " = {" << endl; \
+        for (const auto &row : container) { \
+            cout << "  {"; \
+            for (const auto &item : row) cout << item << " "; \
+            cout << "}" << endl; \
+        } \
+        cout << "}" << endl; \
+    }
+
+    #define dbg(x) cout << #x << " = " << x << endl
+
+    #define dbg2(x, y) cout << #x << " = " << x << ", " << #y << " = " << y << endl
+
+    #define dbg3(x, y, z) cout << #x << " = " << x << ", " << #y << " = " << y << ", " << #z << " = " << z << endl
+
+    #define d_array(arr, n) { \
+        cout << #arr << " = {" << endl << "  "; \
+        for (int i = 0; i < n; i++) cout << arr[i] << (i < n - 1 ? ", " : ""); \
+        cout << endl << "}" << endl; \
+    }
+
+    #define d_2darray(arr, rows, cols) { \
+        cout << #arr << " = {" << endl; \
+        for (int i = 0; i < rows; i++) { \
+            cout << "  {"; \
+            for (int j = 0; j < cols; j++) cout << (j == 0 ? "" : ", ") << arr[i][j]; \
+            cout << "}"; \
+            if (i < rows - 1) cout << ","; \
+            cout << endl; \
+        } \
+        cout << "}" << endl; \
+    }
+
+    #define d_map(mp) { \
+        cout << #mp << " = {" << endl; \
+        for (const auto &item : mp) cout << "  {" << item.first << ", " << item.second << "}," << endl; \
+        cout << "}" << endl; \
+    }
+
+    #define d_set(st) { \
+        cout << #st << " = {" << endl << "  "; \
+        for (const auto &item : st) cout << item << " "; \
+        cout << endl << "}" << endl; \
+    }
+
+    #define d_vpii(v) { \
+        cout << #v << " = {" << endl; \
+        for (const auto &p : v) cout << "  {" << p.first << ", " << p.second << "}," << endl; \
+        cout << "}" << endl; \
+    }
+
+    /* Typedefs */
     typedef long long ll;
     typedef vector<int> vi;
     typedef vector<pair<int,int>> ii;
 
-    /* some macros */
-    #define pb push_back 
-    // #define int ll
-    #define SWAP(a, b) (((a) ^= (b)), ((b) ^= (a)), ((a) ^= (b)))
-     
-    /* some consts */ 
-    const int m = 1e9+7;
+    /* Constants */ 
+    const int MOD = 1e9 + 7;
 
+    /* Debugging Macros */
     #define bug(...)       __f (#__VA_ARGS__, __VA_ARGS__)
     template <typename Arg1>
     void __f (const char* name, Arg1&& arg1) { cout << name << " : " << arg1 << endl; }
@@ -22,26 +110,15 @@ snippet cp
     void __f (const char* names, Arg1&& arg1, Args&&... args)
     {
         const char* comma = strchr (names + 1, ',');
-        cout.write (names, comma - names) << " : " << arg1 << " | "; __f (comma + 1, args...);
+        cout.write (names, comma - names) << " : " << arg1 << " | "; 
+        __f (comma + 1, args...);
     }
 
-    /* global variable */    
-    int flag = 0;
-    int cnt = 0;
-
-    /* sizeof my int byte */
-    #define soi sizeof(int) * CHAR_BIT
-    #define sol sizeof(long long) * CHAR_BIT
-
-    /* repetitive tasks */
-    #define fr(i, a, b) for(int i = a; i < b; i++)
-    #define fn(i,a) for(int i = a; i >= 0; i--)
-
-    /* inline functions */
+    /* Inline Functions */
     inline int sq(int x) { return x * x; }
-    inline int ceil_dev(int a, int b){ return (a+b-1)/b; }
+    inline int ceil_div(int a, int b) { return (a + b - 1) / b; }
 
-    /* power function */
+    /* Power Functions */
     inline int power(int a, int b)
     {
         int x = 1;
@@ -53,9 +130,10 @@ snippet cp
         }
         return x;
     }
-    long long binpow(long long a, long long b, long long m) {
+
+    ll binpow(ll a, ll b, ll m) {
         a %= m;
-        long long res = 1;
+        ll res = 1;
         while (b > 0) {
             if (b & 1)
                 res = res * a % m;
@@ -64,15 +142,45 @@ snippet cp
         }
         return res;
     }
-    /* custom templates */
-    // vector input vci
+
+    /* Custom Templates */
+    // Vector input
     template<typename T>
-    void vci(vector<T>& vec, int size){ for(int i= 0; i < size; i++){ T input; cin >> input; vec.push_back(input); } }
+    void vci(vector<T>& vec, int size) {
+        vec.resize(size); // Resize the vector once before the loop
+        for(int i = 0; i < size; i++) {
+            T input; 
+            cin >> input; 
+            vec[i] = input;
+        }
+    }
 
-    template <typename T> void vvci(vector<vector<T>>& vec, int rows, int cols) { for (int i = 0; i < rows; ++i) { vector<T> row; for (int j = 0; j < cols; ++j) { T input; cin >> input; row.push_back(input); } vec.push_back(row); } }
+    template <typename T> 
+    void vvci(vector<vector<T>>& vec, int rows, int cols) { 
+        vec.resize(rows); // Resize the outer vector once before the loop
+        for (int i = 0; i < rows; ++i) { 
+            vec[i].resize(cols); // Resize each inner vector once before the inner loop
+            for (int j = 0; j < cols; ++j) { 
+                T input; 
+                cin >> input; 
+                vec[i][j] = input; 
+            } 
+        } 
+    }
 
+    template <typename Container>
+    void sor(Container& container) {
+        std::sort(container.begin(), container.end());
+    }
 
-    void solve()
+    template <typename Container>
+    void sord(Container& container) {
+        std::sort(container.begin(), container.end(), std::greater<typename Container::value_type>());
+    }
+
+    // upto here
+
+    void solve() 
     {
         ${0}
     }
@@ -82,6 +190,7 @@ snippet cp
         cin.tie(nullptr);
 
         int t = 1; 
+
         // cin >> t;
 
         while (t--) {
@@ -90,6 +199,8 @@ snippet cp
 
         return 0;
     }
+
+
 snippet st "baseofcpp"
 	#include <bits/stdc++.h>
 	using namespace std;
@@ -106,6 +217,11 @@ snippet fa "for"
 snippet fe "foreach"
 	for(auto &x: ${1}){
 		cout<<x<<' ';
+	}
+
+snippet fee "foreach"
+	for(auto &x: ${1}){
+		cout<<x.first<<' '<<x.second<<'\n';
 	}
 
 snippet tc "testcases"
@@ -159,17 +275,17 @@ snippet base "base of cpp"
     #include <bits/stdc++.h>
     using namespace std;
 
+
+    /* some macros */
+    #define pb push_back 
+    #define p pop 
+    #define pu push 
     /* typedefs */
     typedef long long ll;
     typedef vector<int> vi;
     typedef map<int,int> mi;
     typedef stack<int> st;
     typedef vector<pair<int,int>> ii;
-
-    /* some macros */
-    #define pb push_back 
-    #define p pop 
-    #define pu push 
 
     inline int power(int a, int b)
     {
