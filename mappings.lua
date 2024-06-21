@@ -15,7 +15,7 @@ vim.api.nvim_set_keymap("n", "<space>l", ":HopLine<CR>", { noremap = true, silen
 vim.api.nvim_set_keymap("n", "<space>h", ":HopAnywhere<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<space>u", ":UndotreeToggle<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<space>o", ":AerialToggle<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<space>z", ":TZMinimalist<cr>",{noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<space>z", ":TZMinimalist<cr>",{noremap = true, silent = true})
 
 -- some useful sortcuts
 vim.api.nvim_set_keymap("n", "<space>qq", ":wq<cr>", {noremap = true, silent = true})
@@ -31,8 +31,14 @@ vim.api.nvim_set_keymap("n", "<space>aa", ":CompetiTest add_testcase<CR>", { nor
 vim.api.nvim_set_keymap("n", "<space>dd", ":CompetiTest delete_testcase<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<space>ee", ":CompetiTest edit_testcase<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<space>ct", ":CompetiTest receive testcases<cr>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gt", "/cin >> t;<cr>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gs", "/void solve()<cr>jo", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "gt", "/cin >> t;<cr>_xxx<esc>/void solve()<cr>j%O", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "T", "/cin >> t;<cr>i// <esc>/void solve()<cr>j%O", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "gs", "/void solve()<cr>j%O", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<space>ll", "/#define int long long<cr>_xxx/void solve()<cr>j%O", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<space>lr", "/#define int long long<cr>_i// <esc>/void solve()<cr>j%O", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<space>z", "ggV/upto<cr>zf/void solve()<cr>j%O",{noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<c-t>", ":NERDTreeToggleVCS<cr>",{noremap = true, silent = true})
+
 
 -- bufferline keymaps
 vim.api.nvim_set_keymap("n", "<Tab>", ":BufferLineCycleNext<cr>", {noremap = true, silent = true})
@@ -46,6 +52,7 @@ vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent =
 vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 -- Map ww to <C-w> in insert mode
 vim.api.nvim_set_keymap("i", "ww", "<C-w>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "wd", "<esc>ddO", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "U", "<C-u>zz", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "D", "<C-d>zz", { noremap = true, silent = true })
@@ -72,9 +79,11 @@ vim.o.expandtab = true -- Use spaces instead of tabs
 -- Set relative line numbers
 
 vim.cmd('TZMinimalist')
+
 vim.api.nvim_set_keymap('n', '-', ':lua vim.fn.execute("edit " .. vim.fn.expand("%:h"))<CR>', {noremap = true, silent = true})
 
 vim.opt.termguicolors = true
 require("bufferline").setup{}
 -- Disable search highlighting
 vim.o.hlsearch = false
+vim.api.nvim_set_keymap("n", "<space>y", "ggVGy", { noremap = true, silent = true })
