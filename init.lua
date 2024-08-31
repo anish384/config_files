@@ -1,6 +1,71 @@
 return {
     -- Lua
-    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons',lazy = false},
+    {
+        'kevinhwang91/nvim-ufo',
+        dependencies ={ 'kevinhwang91/promise-async'},
+        config = function ()
+            require('ufo').setup({
+                provider_selector = function(bufnr, filetype, buftype)
+                    return {'treesitter', 'indent'}
+                end
+            })
+        end,
+    },
+    {
+        "ngtuonghy/live-server-nvim",
+        event = "VeryLazy",
+        build = ":LiveServerInstall",
+        config = function()
+            require("live-server-nvim").setup{}
+        end,
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
+    },
+    {
+        "akinsho/bufferline.nvim",
+        config = function()
+            require("bufferline").setup{
+                options = {
+                    -- your bufferline options here
+                    numbers = "both",
+                    close_command = "bdelete! %d",
+                    right_mouse_command = "bdelete! %d",
+                    left_mouse_command = "buffer %d",
+                    middle_mouse_command = nil,
+                    indicator_icon = '▎',
+                    buffer_close_icon = '',
+                    modified_icon = '●',
+                    close_icon = '',
+                    left_trunc_marker = '',
+                    right_trunc_marker = '',
+                    max_name_length = 18,
+                    max_prefix_length = 15,
+                    tab_size = 18,
+                    diagnostics = "nvim_lsp",
+                    diagnostics_indicator = function(count, level, diagnostics_dict, context)
+                        return "("..count..")"
+                    end,
+                    offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center", padding = 1}},
+                    show_buffer_icons = true,
+                    show_buffer_close_icons = true,
+                    show_close_icon = true,
+                    show_tab_indicators = true,
+                    persist_buffer_sort = true,
+                    separator_style = "thin",
+                    enforce_regular_tabs = false,
+                    always_show_bufferline = true,
+                    sort_by = 'id'
+                }
+            }
+        end
+    },
     {
         "folke/flash.nvim",
         event = "VeryLazy",
@@ -89,12 +154,6 @@ return {
             "nvim-tree/nvim-web-devicons"
         },
         lazy = false,
-    },
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
     },
     {
         'stevearc/oil.nvim',
@@ -186,8 +245,10 @@ return {
         opts = {
             ensure_installed = {
                 "vim", "lua", "vimdoc",
-                "html", "css"
+                "html", "css", "cpp", "c"
             },
         },
+        lazy = false,
     },
 }
+
