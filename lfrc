@@ -20,13 +20,13 @@ cmd delete ${{
 
 cmd mkdir ${{
     printf "Directory name: "
-    read ans 
-    mkdir $ans
+    read "ans" 
+    mkdir "$ans"
 }}
 
 cmd mkfile ${{
     printf "File name: "
-    read ans 
+    read "ans" 
     nvim "$ans"
 }}
 
@@ -35,18 +35,59 @@ map r push :rename<space>
 
 map e exe
 
-map gs cd ~/.config/nvim/my_snippet/
+map gs cd ~/.config/nvim/my_snippets/
 map gc cd ~/.config/nvim/lua/
 map gd cd /mnt/c/Users/anishdesai/Desktop/
 map gl  cd ~/.local/share/nvim/lazy/
 map gp cd /mnt/c/Users/anishdesai/Desktop/cp/Practice/
+
+# My NPTEL Mappings
+map g1 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 1: Sorting and Searching Algorithms/"
+
+map g2 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 2: Greedy Algorithms - I/"
+
+map g3 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 3: Greedy Algorithms - II/"
+
+map g4 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 4: Disjoint Set Union with Path Compression/"
+
+map g5 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 5: Minimum Spanning Tree/"
+
+map g6 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 6: Shortest Paths: Dijkstra and Beyond/"
+
+map g7 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 7: Network Flows - I/"
+
+map g8 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 8: Network Flows - II, Divide and Conquer/"
+
+map g9 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 9: Dynamic programming - I/"
+
+map gw0 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 10: Dynamic programming - II/"
+
+map gw1 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 11: Dynamic programming - III/"
+
+map gw2 cd "/mnt/c/Users/anishdesai/Documents/Git_hub/NPTEL_Getting_Started_With_Competitive_Programming_JULY_2024/Week 12: Dynamic programming - IV/"
+
+
 map I cd /mnt/c/Users/anishdesai/Documents/Git_hub/
 map C cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Codeforces/
-map P cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Practice/
+# map P cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Practice/
 map A cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/AtCoder/
 map S cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Codechef/
+
+map P cd ~/cp/
 
 map M mkdir
 map F mkfile
 map D delete
 map L lazy
+cmd touch %touch "$@"
+map a push :touch<space>
+
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+map gz :zip

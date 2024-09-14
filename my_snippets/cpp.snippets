@@ -16,6 +16,8 @@ snippet cp
     #define In(var) cin>>var;
     #define print(var) cout << var << endl
 
+    #define int long long
+
     /* Size of integer and long long in bits */
     #define soi (sizeof(int) * CHAR_BIT)
     #define sol (sizeof(long long) * CHAR_BIT)
@@ -181,8 +183,7 @@ snippet cp
     // upto here
 
     void solve() 
-    {
-        ${0}
+    {${0}
     }
 
     int32_t main() {
@@ -199,7 +200,6 @@ snippet cp
 
         return 0;
     }
-
 
 snippet st "baseofcpp"
 	#include <bits/stdc++.h>
@@ -220,9 +220,11 @@ snippet fe "foreach"
 	}
 
 snippet fee "foreach"
-	for(auto &x: ${1}){
-		cout<<x.first<<' '<<x.second<<'\n';
-	}
+    for(auto &x: ${1}){
+        for(auto &y : x){
+            ${2}
+        }
+    }
 
 snippet tc "testcases"
 	int tc = 0;
@@ -312,7 +314,8 @@ snippet base "base of cpp"
         ${0}
     }
 
-snippet cin "cin >> "
-    cin>>${0}
+snippet ct
+    cout<<${1}
 
-
+snippet cn
+    cin>>${1}
