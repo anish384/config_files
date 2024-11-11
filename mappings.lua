@@ -1,109 +1,142 @@
 require "nvchad.mappings"
 
--- add yours here
-
+-- Shortcut for setting keymaps
 local set_keymap = vim.keymap.set
 
+-- Escape using 'jj' in insert mode
 set_keymap("i", "jj", "<ESC>")
 
 -- Improved map function with no naming conflict
 local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    local options = { noremap = true, silent = true }
+    if opts then
+        options = vim.tbl_extend('force', options, opts)
+    end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- Mappings using the custom map function
-map("n", "<space>r", ":RunCode<CR>")
-map("n", "<space>ad", "ggVGd")
-map("n", "<space>sa", "ggVG")
-map("n", "<space>=", "ggVG=")
--- map("n", "<space>l", ":HopLine<CR>")
-map("n", "<space>h", ":HopAnywhere<CR>")
-map("n", "<space>u", ":UndotreeToggle<CR>")
-map("n", "<space>o", ":AerialToggle<CR>")
+-- Statusline setting
+vim.o.statusline = ' '
 
--- Useful shortcuts
-map("n", "<space>qq", ":wq<CR>")
-map("n", "<space>qz", ":q!<CR>")
+-- General mappings
+map("n", "<space>r", ":RunCode<CR>") -- Run code
+map("n", "<space>ad", "ggVGd") -- Select and delete all content
+map("n", "<space>sa", "ggVG") -- Select all content
+map("n", "<space>=", "ggVG=") -- Format the entire file
 
--- NERDTree mapping
-map("n", "<space>i", ":NERDTreeToggleVCS<CR>")
+-- Toggle utilities
+map("n", "<space>h", ":HopAnywhere<CR>") -- Hop to any location
+map("n", "<space>u", ":UndotreeToggle<CR>") -- Toggle Undo tree
+map("n", "<space>o", ":AerialToggle<CR>") -- Toggle outline (Aerial)
+
+-- File and buffer commands
+map("n", "<space>qq", ":wq<CR>") -- Save and quit
+map("n", "<space>qz", ":q!<CR>") -- Force quit
+
+-- NERDTree mappings
+map("n", "<space>i", ":NERDTreeToggleVCS<CR>") -- Toggle NERDTree with version control support
 
 -- Competitive programming keymaps
 map("n", "<space>cc", ":CompetiTest receive contest<CR>")
 map("n", "<space>cr", ":CompetiTest run<CR>")
+-- map("n", "<space>cc", ":CphReceive<cr>")
+-- map("n", "<space>cr", ":CphTest<cr>")
 map("n", "<space>aa", ":CompetiTest add_testcase<CR>")
 map("n", "<space>dd", ":CompetiTest delete_testcase<CR>")
 map("n", "<space>ee", ":CompetiTest edit_testcase<CR>")
 map("n", "<space>ct", ":CompetiTest receive testcases<CR>")
-map("n", "gt", "/cin >> t;<CR>_xxx<ESC>/void solve()<CR>j<ESC>")
-map("n", "T", "/cin >> t;<CR>i// <ESC>/void solve()<CR>j<ESC>")
-map("n", "gs", "/void solve()<CR>j<ESC>")
+map("n", "gt", "/cin >> t;<CR>_xxx<ESC>/void solve()<CR>j<ESC>") -- Go to test cases
+map("n", "T", "/cin >> t;<CR>i// <ESC>/void solve()<CR>j<ESC>") -- Comment test cases
+map("n", "gs", "/void solve()<CR>j<ESC>") -- Go to solve function
 map("n", "<space>ll", "/#define int long long<CR>_xxx/void solve()<CR>j<ESC>")
 map("n", "<space>lr", "/#define int long long<CR>_i// <ESC>/void solve()<CR>j<ESC>")
-map("n", "<space>z", "ggV/upto<CR>zf/void solve()<CR>j<ESC>")
-map("n", "<c-t>", ":NERDTreeToggleVCS<CR>")
+map("n", "<space>z", "ggV/upto<CR>zf/void solve()<CR>j<ESC>") -- Fold the solve function
+map("n", "<space>cs", "/void solve()<CR>Vj%y")
+map("n", "<space>ci", "/void solve()<CR>jvi{d%")
 
 -- Bufferline keymaps
-map("n", "<Tab>", ":BufferLineCycleNext<CR>")
-map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>")
-map("n", "X", ":BufferLineCloseOthers<CR>")
+map("n", "<Tab>", ":BufferLineCycleNext<CR>") -- Next buffer
+map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>") -- Previous buffer
+map("n", "X", ":BufferLineCloseOthers<CR>") -- Close all other buffers
 
 -- Move selected lines in visual mode
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
+map("v", "J", ":m '>+1<CR>gv=gv") -- Move line down
+map("v", "K", ":m '<-2<CR>gv=gv") -- Move line up
 
-map("n", "J", "%");
+-- Jump to matching braces and parentheses
+map("n", "J", "%")
 
 -- Insert mode mappings
-map("i", "ww", "<C-w>")
-map("i", "wd", "<ESC>ddO")
+map("i", "ww", "<C-w>") -- Delete word in insert mode
+map("i", "wd", "<ESC>ddO") -- Delete current line and create a new line
 
-map("n", "U", "<C-u>zz")
-map("n", "D", "<C-d>zz")
-map("n", "[[", "[[zz")
-map("n", "L", "$")
-map("n", "H", "^")
-map("n", "<space>mr",":PeekOpen<cr>")
-map("n", "<space>hr", ":!cmd.exe /c start chrome http://127.0.0.1:8080<cr>")
-map("n", "<space>ls", ":LiveServerStart<cr>")
-map("n", "<space>lf", ":Lf<cr>")
+-- Navigation improvements
+map("n", "U", "<C-u>") -- Scroll up half a page
+map("n", "D", "<C-d>zz") -- Scroll down half a page and center cursor
+map("n", "[[", "[[zz") -- Jump to previous section and center
+map("n", "L", "$") -- Jump to end of line
+map("n", "H", "^") -- Jump to beginning of line
 
--- Use tab to confirm selection and cycle through suggestions
+-- Special commands
+map("n", "<space>mr", ":PeekOpen<cr>") -- Open markdown preview
+map("n", "<space>hr", ":!cmd.exe /c start chrome http://127.0.0.1:8080<cr>") -- Open local server in Chrome
+map("n", "<space>ls", ":LiveServerStart<cr>") -- Start live server
+map("n", "<space>lf", ":Lf<cr>") -- Open file manager (lf)
+
+-- Use Tab to confirm selection and cycle through suggestions in insert mode
 map("i", "<Tab>", 'pumvisible() ? "\\<C-y>" : "\\<Tab>"', { expr = true })
 
--- Lua-specific mappings
-set_keymap("n", "[d", vim.diagnostic.goto_prev, {})
-set_keymap("n", "]d", vim.diagnostic.goto_next, {})
+-- Lua-specific diagnostic mappings
+set_keymap("n", "[d", vim.diagnostic.goto_prev, {}) -- Go to previous diagnostic
+set_keymap("n", "]d", vim.diagnostic.goto_next, {}) -- Go to next diagnostic
 
--- Set tab length and indentation settings
+-- Set tab and indentation settings
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true -- Use spaces instead of tabs
 
--- Miscellaneous settings
-vim.cmd('TZMinimalist')
--- map('n', '-', ':lua vim.fn.execute("edit " .. vim.fn.expand("%:h"))<CR>')
-
+-- Enable 24-bit RGB colors in the terminal UI
 vim.opt.termguicolors = true
 require("bufferline").setup{}
 
 -- Disable search highlighting
 vim.o.hlsearch = false
-map("n", "<space>y", "ggVGy")
+map("n", "<space>y", "ggVGy") -- Yank all content
 
--- Set relative line numbers
+-- Enable relative line numbers
 vim.api.nvim_command('set relativenumber')
 
-vim.o.foldcolumn = '0' -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
+-- Folding settings
+vim.o.foldcolumn = '0' -- Hide fold column
+vim.o.foldlevel = 99 -- Set high fold level for ufo plugin
+vim.o.foldlevelstart = 99 -- Start with all folds open
+vim.o.foldenable = true -- Enable folding by default
 
+-- Fold commands using ufo plugin
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds) -- Open all folds
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds) -- Close all folds
 
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+-- Automatically add comment block on new file creation
+vim.api.nvim_create_autocmd("BufNewFile", {
+  pattern = "*",
+  callback = function()
+    local user = vim.fn.getenv("USER") or "Unknown"
+    local date = os.date("%d.%m.%Y %H:%M:%S")
+    local comment_block = {
+      "/*",
+      " * Author: " .. user,
+      " * Created: " .. date,
+      " */",
+      ""
+    }
+    -- Insert comment block at the start of the buffer
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, comment_block)
+  end
+})
+-- Set pitch-black background for floating windows (to match terminal look)
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#000000', fg = '#c8d3f5' }) -- Dark background with light text
+
+-- Set border to a subtle gray to maintain a minimalist appearance
+-- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#000000', fg = '#444444' }) -- Gray border for minimal contrast
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#000000', fg = '#87ceeb' }) -- Gray border for minimal contrast
