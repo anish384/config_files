@@ -20,6 +20,13 @@ vim.o.statusline = ' '
 
 -- General mappings
 map("n", "<space>r", ":RunCode<CR>") -- Run code
+
+-- F9 key mapping for insert mode (g++ compile and run with additional flags)
+vim.api.nvim_set_keymap('i', '<F9>', '<esc>:w<CR>:terminal g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>i', { noremap = true, silent = true })
+
+
+vim.api.nvim_set_keymap('n', '<F10>', ':w<CR>:terminal g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>i', { noremap = true, silent = true })
+
 map("n", "<space>ad", "ggVGd") -- Select and delete all content
 map("n", "<space>sa", "ggVG") -- Select all content
 map("n", "<space>=", "ggVG=") -- Format the entire file
@@ -140,3 +147,8 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#000000', fg = '#c8d3f5' }) -- Dar
 -- Set border to a subtle gray to maintain a minimalist appearance
 -- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#000000', fg = '#444444' }) -- Gray border for minimal contrast
 vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#000000', fg = '#87ceeb' }) -- Gray border for minimal contrast
+
+local ok, base46 = pcall(require, "base46")
+if not ok then
+    error("base46 module is not installed or loaded")
+end

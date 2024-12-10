@@ -45,7 +45,8 @@ map gs cd ~/.config/nvim/my_snippets/
 map gc cd ~/.config/nvim/lua/
 map gd cd /mnt/c/Users/anishdesai/Desktop/
 map gl  cd ~/.local/share/nvim/lazy/
-map gp cd /mnt/c/Users/anishdesai/Desktop/cp/Practice/
+map gp cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Practice/Topics/
+
 
 map I cd /mnt/c/Users/anishdesai/Documents/Git_hub/
 map C cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Codeforces/

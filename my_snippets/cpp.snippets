@@ -1,5 +1,9 @@
 snippet cp
+    #ifdef ONPC
+        #define _GLIBCXX_DEBUG
+    #endif
     #include <bits/stdc++.h>
+
     using namespace std;
 
     /* Macros */
@@ -11,7 +15,7 @@ snippet cp
     #define pnn cout << "no" << '\n'
     #define pY cout << "YES" << '\n'
     #define pN cout << "NO" << '\n'
-    #define endl '\n'
+    #define nl '\n'
     #define icn(type, var) type var; cin >> var
     #define In(var) cin>>var;
     #define print(var) cout << var << endl
@@ -194,10 +198,19 @@ snippet cp
 
         // cin >> t;
 
+        #ifdef ONPC
+            printf("Test Case Started: \n\n");
+        #endif // ONPC
+
         while (t--) {
             solve();
+            #ifdef ONPC // from: peltorator (youtube)
+                cerr << "__________________________" << nl;
+            #endif
         }
-
+        #ifdef ONPC 
+            cerr << "Finished execution in " << static_cast<double>(clock()) * 1.0 / CLOCKS_PER_SEC << " sec" << nl;
+        #endif
         return 0;
     }
 
@@ -248,12 +261,6 @@ snippet vi "vector of int"
     vector <int> ${1};
     ${0}
 
-snippet cc "cout"
-    cout<<${0}
-
-snippet ci "cin"
-    cin>>${0}
-
 snippet bc "bits"
     #include <bits/stdc++.h>
     ${0}
@@ -277,7 +284,6 @@ snippet base "base of cpp"
     #include <bits/stdc++.h>
     using namespace std;
 
-
     /* some macros */
     #define pb push_back 
     #define p pop 
@@ -289,25 +295,9 @@ snippet base "base of cpp"
     typedef stack<int> st;
     typedef vector<pair<int,int>> ii;
 
-    inline int power(int a, int b)
-    {
-        int x = 1;
-        while (b)
-        {
-            if (b & 1) x *= a;
-            a *= a;
-            b >>= 1;
-        }
-        return x;
-    }
-
     /* repetitive tasks */
     #define fr(i, a, b) for(int i = a; i < b; i++)
     #define fn(i,a) for(int i = a; i >= 0; i--)
-
-    /* sizeof my int byte */
-    #define soi sizeof(int) * CHAR_BIT
-    #define sol sizeof(long long) * CHAR_BIT
 
     int main()
     {
@@ -317,5 +307,12 @@ snippet base "base of cpp"
 snippet ct
     cout<<${1}
 
+snippet ctt
+    cout<<${1}<<' '<<${2};
+    ${3}
+
 snippet cn
     cin>>${1}
+
+snippet pq
+    priority_queue<${1}>${2}
