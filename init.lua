@@ -1,5 +1,6 @@
 return {
     -- Lua
+    -- Lazy
     {
         "lmburns/lf.nvim",
         dependencies = { "akinsho/toggleterm.nvim" },
@@ -206,12 +207,6 @@ return {
         config = function ()
             require('neoscroll').setup {}
         end,
-        lazy = false,
-    },
-    {
-        'smoka7/hop.nvim',
-        version = "*",
-        opts = {},
         lazy = false,
     },
     {
