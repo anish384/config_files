@@ -22,10 +22,9 @@ vim.o.statusline = ' '
 map("n", "<space>r", ":RunCode<CR>") -- Run code
 
 -- F9 key mapping for insert mode (g++ compile and run with additional flags)
-vim.api.nvim_set_keymap('i', '<F9>', '<esc>:w<CR>:terminal g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<F9>', '<esc>:w<CR>:terminal g++ -fsanitize=address -std=c++20 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>i', { noremap = true, silent = true })
 
-
-vim.api.nvim_set_keymap('n', '<F10>', ':w<CR>:terminal g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F10>', ':w<CR>:terminal g++ -fsanitize=address -std=c++20 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>i', { noremap = true, silent = true })
 
 map("n", "<space>ad", "ggVGd") -- Select and delete all content
 map("n", "<space>sa", "ggVG") -- Select all content
@@ -35,6 +34,7 @@ map("n", "<space>=", "ggVG=") -- Format the entire file
 map("n", "<space>h", ":HopAnywhere<CR>") -- Hop to any location
 map("n", "<space>u", ":UndotreeToggle<CR>") -- Toggle Undo tree
 map("n", "<space>o", ":AerialToggle<CR>") -- Toggle outline (Aerial)
+map("n", "<space>a", ":NvimTreeToggle<CR>a")
 
 -- File and buffer commands
 map("n", "<space>qq", ":wq<CR>") -- Save and quit
@@ -52,14 +52,14 @@ map("n", "<space>aa", ":CompetiTest add_testcase<CR>")
 map("n", "<space>dd", ":CompetiTest delete_testcase<CR>")
 map("n", "<space>ee", ":CompetiTest edit_testcase<CR>")
 map("n", "<space>ct", ":CompetiTest receive testcases<CR>")
-map("n", "gt", "/cin >> t;<CR>_xxx<ESC>/void solve()<CR>j<ESC>") -- Go to test cases
-map("n", "T", "/cin >> t;<CR>i// <ESC>/void solve()<CR>j<ESC>") -- Comment test cases
-map("n", "gs", "/void solve()<CR>j<ESC>") -- Go to solve function
-map("n", "<space>ll", "/#define int long long<CR>_xxx/void solve()<CR>j<ESC>")
-map("n", "<space>lr", "/#define int long long<CR>_i// <ESC>/void solve()<CR>j<ESC>")
-map("n", "<space>z", "ggV/upto<CR>zf/void solve()<CR>j<ESC>") -- Fold the solve function
+map("n", "gt", "/cin >> t;<CR>_xxx<ESC>/void solve()<CR>j<ESC>zz") -- Go to test cases
+map("n", "T", "/cin >> t;<CR>i// <ESC>/void solve()<CR>j<ESC>zz") -- Comment test cases
+map("n", "gs", "/void solve()<CR>j<ESC>zz") -- Go to solve function
+map("n", "<space>ll", "/#define int long long<CR>_xxx/void solve()<CR>j<ESC>zz")
+map("n", "<space>lr", "/#define int long long<CR>_i// <ESC>/void solve()<CR>j<ESC>zz")
+map("n", "<space>z", "ggV/upto<CR>zf/void solve()<CR>j<ESC>zz") -- Fold the solve function
 map("n", "<space>cs", "/void solve()<CR>Vj%y")
-map("n", "<space>ci", "/void solve()<CR>jvi{d%")
+map("n", "<space>ci", "/void solve()<CR>jvi{d%o")
 
 -- Bufferline keymaps
 map("n", "<Tab>", ":BufferLineCycleNext<CR>") -- Next buffer
@@ -86,7 +86,11 @@ map("n", "H", "^") -- Jump to beginning of line
 
 -- Special commands
 map("n", "<space>mr", ":PeekOpen<cr>") -- Open markdown preview
-map("n", "<space>hr", ":!cmd.exe /c start chrome http://127.0.0.1:8080<cr>") -- Open local server in Chrome
+-- map("n", "<space>hr", ":!cmd.exe /c start chrome http://127.0.0.1:8080<cr>") -- Open local server in Chrome
+-- map("n", "<space>hr", ":!cmd.exe /c start chrome %<CR>")
+--
+-- map("n", "<space>hr", ":!chrome.exe $(wslpath -w %)<CR>")
+map("n", "<space>hr", ":!cmd.exe /c start chrome $(wslpath -w %)<CR>")
 map("n", "<space>ls", ":LiveServerStart<cr>") -- Start live server
 map("n", "<space>lf", ":Lf<cr>") -- Open file manager (lf)
 
@@ -124,31 +128,9 @@ vim.o.foldenable = true -- Enable folding by default
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds) -- Open all folds
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds) -- Close all folds
 
--- Automatically add comment block on new file creation
-vim.api.nvim_create_autocmd("BufNewFile", {
-  pattern = "*",
-  callback = function()
-    local user = vim.fn.getenv("USER") or "Unknown"
-    local date = os.date("%d.%m.%Y %H:%M:%S")
-    local comment_block = {
-      "/*",
-      " * Author: " .. user,
-      " * Created: " .. date,
-      " */",
-      ""
-    }
-    -- Insert comment block at the start of the buffer
-    vim.api.nvim_buf_set_lines(0, 0, 0, false, comment_block)
-  end
-})
 -- Set pitch-black background for floating windows (to match terminal look)
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#000000', fg = '#c8d3f5' }) -- Dark background with light text
-
--- Set border to a subtle gray to maintain a minimalist appearance
+--
+-- -- Set border to a subtle gray to maintain a minimalist appearance
 -- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#000000', fg = '#444444' }) -- Gray border for minimal contrast
 vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#000000', fg = '#87ceeb' }) -- Gray border for minimal contrast
-
-local ok, base46 = pcall(require, "base46")
-if not ok then
-    error("base46 module is not installed or loaded")
-end

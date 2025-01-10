@@ -2,6 +2,27 @@ return {
     -- Lua
     -- Lazy
     {
+        'kobbikobb/move-lines.nvim',
+        config = function()
+            require('move-lines').setup({
+                move_down = 'J', -- Custom key for moving lines down
+                move_up = 'K',   -- Custom key for moving lines up
+                move_left = 'H', -- Custom key for moving lines left
+                move_right = 'L' -- Custom key for moving lines right
+            })
+        end,
+        lazy = false;
+    },
+    {
+        "lervag/vimtex",
+        lazy = false,     -- we don't want to lazy load VimTeX
+        -- tag = "v2.15", -- uncomment to pin to a specific release
+        init = function()
+            -- VimTeX configuration goes here, e.g.
+            vim.g.vimtex_view_method = "zathura"
+        end
+    },
+    {
         "lmburns/lf.nvim",
         dependencies = { "akinsho/toggleterm.nvim" },
         config = function()
@@ -84,7 +105,7 @@ return {
                     persist_buffer_sort = true,
                     separator_style = "thin",
                     enforce_regular_tabs = false,
-                    always_show_bufferline = true,
+                    always_show_bufferline = false,
                     sort_by = 'id'
                 }
             }

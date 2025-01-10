@@ -1,11 +1,15 @@
 snippet cp
+    /*
+    *  author     : anishdesai
+    *  Created on : `strftime("%d-%m-%Y: %H:%M:%S")`
+    *  Filename   : `expand('%:t')`
+    *  Github     : https://github.com/anish384
+    */
     #ifdef ONPC
         #define _GLIBCXX_DEBUG
     #endif
     #include <bits/stdc++.h>
-
     using namespace std;
-
     /* Macros */
     #define pb push_back 
     #define SWAP(a, b) (((a) ^= (b)), ((b) ^= (a)), ((a) ^= (b)))
@@ -19,19 +23,14 @@ snippet cp
     #define icn(type, var) type var; cin >> var
     #define In(var) cin>>var;
     #define print(var) cout << var << endl
-
     #define int long long
-
     /* Size of integer and long long in bits */
     #define soi (sizeof(int) * CHAR_BIT)
     #define sol (sizeof(long long) * CHAR_BIT)
-
     /* Repetitive Tasks */
     #define fr(i, a, b) for(int i = a; i < b; i++)
     #define fn(i, a) for(int i = a; i >= 0; i--)
-
     #define d_pair(p) cout << #p << " = (" << p.first << ", " << p.second << ")" << endl
-
 
     #define d_con(container) { \
         cout << #container << " = {" << endl << "  "; \
@@ -204,7 +203,7 @@ snippet cp
 
         while (t--) {
             solve();
-            #ifdef ONPC // from: peltorator (youtube)
+            #ifdef ONPC
                 cerr << "__________________________" << nl;
             #endif
         }
