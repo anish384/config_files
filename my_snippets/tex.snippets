@@ -1,0 +1,85 @@
+snippet beg
+    \begin{document}
+        ${0}
+    \end{document}
+
+
+snippet abc
+    \documentclass[a4paper,12pt]{report}
+    \usepackage[left=3.5cm,right=1.25cm,top=2.5cm,bottom=1.25cm]{geometry}
+    \usepackage{fancyhdr}
+    \usepackage{mathptmx}
+    \usepackage{graphicx}
+    \usepackage{setspace}
+    \usepackage{hyperref}
+    \usepackage{listings}
+    \usepackage{xcolor}
+
+    \doublespacing
+
+    \lstset{
+        language=Python,            % Specify the programming language
+        basicstyle=\ttfamily\small, % Set font size and type
+        keywordstyle=\color{blue},  % Keywords color
+        stringstyle=\color{red},    % Strings color
+        commentstyle=\color{green!60!black}, % Comments color
+        numbers=left,               % Line numbers on the left
+        numberstyle=\tiny,          % Line numbers font size
+        stepnumber=1,               % Step between line numbers
+        frame=single,               % Frame around the code
+        tabsize=2,                  % Tab space width
+        breaklines=true,            % Break long lines
+        captionpos=b,               % Caption position
+    }
+
+    \setlength{\headheight}{13.6pt}
+    \addtolength{\topmargin}{-1.6pt}
+    \pagestyle{fancy} 
+    \fancyhf{} % Clear all header and footer fields
+    \renewcommand{\headrulewidth}{2pt} % Thickness of the header line
+    \renewcommand{\footrulewidth}{2pt} % Thickness of the footer line
+    \fancyhead[C]{\small \textbf{Determining the Genre of Music from a Melody Using Machine Learning and Data Processing}}
+    \fancyfoot[L]{\small \textbf{Dept. of CSE, AITM, Belagavi}}
+    \fancyfoot[R]{\small \textbf{\thepage}}
+
+    \fancypagestyle{plain}{
+        \fancyhf{}
+        \renewcommand{\headrulewidth}{2pt} % Add line to plain style
+        \renewcommand{\footrulewidth}{2pt}
+        \fancyhead[C]{\small \textbf{Determining the Genre of Music from a Melody Using Machine Learning and Data Processing}}
+        \fancyfoot[L]{\small \textbf{Dept. of CSE, AITM, Belagavi}}
+        \fancyfoot[R]{\small \textbf{\thepage}}
+    }
+
+    \begin{document}
+
+    \title{Determining the Genre of Music from a Melody Using Machine Learning and Data Processing}
+    \author {
+        Harshal Poriwade \\
+        \and 
+        Anish Anil Desai \\ 
+        \and
+        Jyoti Kamble
+    }
+    \date{\today}
+    \maketitle
+
+    \pagenumbering{roman} 
+    \tableofcontents
+    \listoffigures
+    \clearpage
+
+    \pagenumbering{arabic} 
+    \setcounter{page}{1}
+
+    \chapter{Introduction}
+    \section{Introduction}
+    ${0}
+
+    \begin{thebibliography}{99}
+        \bibitem{bandwagon2023spotifygenres} \textit{9 music genres on Spotify you might not have heard of before}, Bandwagon Asia, Available at: \url{https://www.bandwagon.asia/articles/9-eclectic-spotifygenres-you-may-not-have-heard-of-before-wrapped-every-noise-atonce-lowercase-stomp-and-holler-pixie-skwee-catstep-ninjaSolipsynthm-wonky-escape-room-2021}, Accessed 2023.
+
+    \end{thebibliography}
+
+    \end{document}
+
