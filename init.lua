@@ -2,6 +2,15 @@ return {
     -- Lua
     -- Lazy
     {
+        'filipdutescu/renamer.nvim',
+        branch = 'master',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            require('renamer').setup()
+        end,
+        lazy = false;
+    },
+    {
         'kobbikobb/move-lines.nvim',
         config = function()
             require('move-lines').setup({

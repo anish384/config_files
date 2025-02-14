@@ -6,6 +6,14 @@ cmd exe ${{
     ~/nvim-linux64/bin/nvim "$f"
 }}
 
+cmd cp ${{
+    ~/nvim-linux64/bin/nvim +"lua local user = vim.fn.getenv(\"USER\") or \"Unknown\" local date = os.date(\"%d.%m.%Y %H:%M:%S\") local header = {\"/*\", \" * Author: \" .. user, \" * Created: \" .. date, \" */\", \"\"} vim.api.nvim_buf_set_lines(0, 0, -1, false, header)" "$f"
+}}
+
+cmd vi ${{
+    vi "$f"
+}}
+
 cmd pdfopen ${{
     zathura "$f"
 }}
@@ -34,12 +42,18 @@ cmd mkfile ${{
     nvim "$ans"
 }}
 
-cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+# rename %[ -e "$1" ] && printf "Error: File '%s' already exists.\n" "$1" || mv "$f" "$1" && printf "Renamed '%s' to '%s'.\n" "$f" "$1" || printf "Error: Failed to rename '%s'.\n" "$f"
+
+rename %[ -e "$1" ] && printf "Error: File '%s' already exists.\n" "$1" || { mv "$f" "$1" && printf "Renamed '%s' to '%s'.\n" "$f" "$1"; } || printf "Error: Failed to rename '%s'.\n" "$f"
+
 map r push :rename<space>
+
 
 map e exe
 
-map o pdfopen
+# map o pdfopen
+map o cp
 
 map gs cd ~/.config/nvim/my_snippets/
 map gc cd ~/.config/nvim/lua/
@@ -47,6 +61,7 @@ map gd cd /mnt/c/Users/anishdesai/Desktop/
 map gl  cd ~/.local/share/nvim/lazy/
 map gp cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Practice/Topics/
 
+map gx cd /mnt/c/xampp/htdocs/College_Project/
 
 map I cd /mnt/c/Users/anishdesai/Documents/Git_hub/
 map C cd /mnt/c/Users/anishdesai/Documents/Git_hub/competitive_programming/Codeforces/

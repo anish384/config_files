@@ -134,3 +134,11 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#000000', fg = '#c8d3f5' }) -- Dar
 -- -- Set border to a subtle gray to maintain a minimalist appearance
 -- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#000000', fg = '#444444' }) -- Gray border for minimal contrast
 vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#000000', fg = '#87ceeb' }) -- Gray border for minimal contrast
+
+vim.api.nvim_set_keymap('n', '<space>vr', ':VimtexCompile<CR>', { noremap = true, silent = true })
+
+vim.g.vimtex_quickfix_mode = 0
+
+vim.api.nvim_set_keymap('i', '<F2>', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
